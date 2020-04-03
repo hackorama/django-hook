@@ -1,6 +1,11 @@
-# dot files except .gitignore 
+# Dot files except .gitignore
 .*
 !.gitignore
 
-# python virtual env
+# Python
 venv
+__pycache__/
+*.py[cod]
+
+# Django
+db.sqlite3
