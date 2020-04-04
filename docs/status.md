@@ -36,7 +36,7 @@ Triggering event create ...
 $
 ```
 
-**Verify task execution through task queue***
+**Verify task execution through task queue**
 
 ```
 $ python manage.py run_huey
@@ -55,7 +55,7 @@ Triggering event delete ...
 $
 ```
 
-**Verify task execution retries***
+**Verify task execution retries**
 
 ```
 $ python manage.py run_huey
