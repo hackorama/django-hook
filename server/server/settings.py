@@ -121,6 +121,22 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+        },
+    },
+    'root': {
+        'handlers': ['console'],
+        'level': 'INFO',
+    },
+}
+
+
 # Heuy task queue settings
 # https://huey.readthedocs.io/en/latest/django.html
 
