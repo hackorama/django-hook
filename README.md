@@ -51,12 +51,29 @@ on server app.
 
 ### Webhook registration
 
-> TODO: Details of registering webhooks linked to application events
+Using the Django admin to do the event and webhook creation and registration during the testing.
+
+![Add Webhooks](docs/screenshots/add-webhook.png)
+
+[See more screenshots](docs/status.md#april-2-2020)
 
 ### Event triggering
 
-> TODO: Details of the pre-defined events and how to trigger them for testing registered webhooks
+Events are triggered using a trigger API endpoint `trigger/<event>`
 
+### Webhook execution
+
+For each event trigger:
+ - Lookup the webhooks for the corresponding event from database
+ - Execute POST on each with event name as the payload.
+ - For non-Success response or failed connection add the webhook and payload to retry queue
+
+### Webhook retry loop
+
+This will be a separate scheduled task execution thread that will retry the queued up failed webhooks.
+
+> Could be simple database backed queue with task scheduler like [scheduler](https://github.com/dbader/schedule)
+> or could be a full blown task queue like Celery/RQ/Huey/Carrot etc.
 
 ## Server application data layer
 
