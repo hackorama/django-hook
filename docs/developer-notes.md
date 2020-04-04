@@ -141,3 +141,60 @@ Starting development server at http://127.0.0.1:8000/
 
 ```
 
+## Django Huey
+
+
+
+```shell script
+$ pip install huey
+```shell script
+
+```shell script
+$ vi server/settings.py
+...
+INSTALLED_APPS = [
+     ...
+    'huey.contrib.djhuey',
+...
+...
+HUEY = {
+    'huey_class': 'huey.SqliteHuey',
+    'name': DATABASES['default']['NAME'],
+    'immediate': False,
+    # Options to pass into the consumer when running ``manage.py run_huey``
+    'consumer': {
+        'workers': 4,
+        'worker_type': 'thread',
+    },
+}
+...
+$
+```
+
+```shell script
+$ vi hooks/views.py
+...
+from huey.contrib.djhuey import task
+...
+@task()
+def test_task(name):
+    print('Executing %s ...' % name)
+    return 'Executed task %s' % name
+...
+$
+````
+
+```shell script
+$ python manage.py run_huey
+[2020-04-04 12:31:38,265] INFO:huey.consumer:MainThread:Huey consumer started with 4 thread, PID 19278 at 2020-04-04 19:31:38.265516
+[2020-04-04 12:31:38,265] INFO:huey.consumer:MainThread:Scheduler runs every 1 second(s).
+[2020-04-04 12:31:38,265] INFO:huey.consumer:MainThread:Periodic tasks are enabled.
+[2020-04-04 12:31:38,265] INFO:huey.consumer:MainThread:The following commands are available:
++ hooks.views.test_task
+...
+[2020-04-04 12:33:44,870] INFO:huey:Worker-3:Executing hooks.views.test_task: fb3dfba6-d175-44b2-aeee-c53388f742dd
+Executing create ...
+[2020-04-04 12:33:44,871] INFO:huey:Worker-3:hooks.views.test_task: fb3dfba6-d175-44b2-aeee-c53388f742dd executed in 0.000s
+...
+````
+

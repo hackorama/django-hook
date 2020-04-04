@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'huey.contrib.djhuey',
 ]
 
 MIDDLEWARE = [
@@ -119,3 +120,17 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
+
+# Heuy task queue settings
+# https://huey.readthedocs.io/en/latest/django.html
+
+HUEY = {
+    'huey_class': 'huey.SqliteHuey',
+    'name': DATABASES['default']['NAME'],
+    'immediate': False,
+    # Options to pass into the consumer when running ``manage.py run_huey``
+    'consumer': {
+        'workers': 4,
+        'worker_type': 'thread',
+    },
+}

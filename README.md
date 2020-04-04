@@ -27,19 +27,18 @@ A Django webhooks application that:
 ### Server application
 
 This demo server application triggers a set of pre-defined events. These events can be triggered on demand and/or
-randomly triggered periodically in the main application loop.
+randomly triggered periodically in the main application loop. The webhhok POST request execution will be submitted
+to a task queue which will do non-blocking execution with retries on failure.
 
 The demo application allows registering of one or more webhook url's with one or more of these pre-defined events.
 
 > This is similar to the github woobhooks registration for github events/actions.
 
-> Initially use the Django provided admin interface to create events and registering webhhooks.
+> Initially use the Django provided admin interface to create events and for creating and registering webhhooks.
 
 ### Client application for testing
 
 This is a demo client application that can receive/consume a set of webhooks used for testing the server app.
-This client will have webhok endpoint than can respond with custom response code range to test the re-queuing
-on server app.
 
 > Any of the public webhooks test sites like [webhook.site](https://webhook.site) can also be used for normal testing
 > without the re-queuing scenario.
@@ -65,15 +64,18 @@ Events are triggered using a trigger API endpoint `trigger/<event>`
 
 For each event trigger:
  - Lookup the webhooks for the corresponding event from database
- - Execute POST on each with event name as the payload.
+ - Submit a POST request for each webhook with event name as the payload using a retrying task queue
  - For non-Success response or failed connection add the webhook and payload to retry queue
 
-### Webhook retry loop
+### Webhook task queue
 
-This will be a separate scheduled task execution thread that will retry the queued up failed webhooks.
+Decided to use [Huey](https://huey.readthedocs.io/en/latest/) task queue which is a lightweight alternative to more
+feature rich and popular task queues like Celery/RQ/Carrot.
 
-> Could be simple database backed queue with task scheduler like [scheduler](https://github.com/dbader/schedule)
-> or could be a full blown task queue like Celery/RQ/Huey/Carrot etc.
+- Can work with the built-in SQLite as the backend for demo/prototype
+- Can switch to Redis as the backend easily for production
+- Other task queues requires Redis or RabbitMQ even for prototype
+- Has Django framework integration
 
 ## Server application data layer
 

@@ -1,8 +1,95 @@
 # Status
 
+- [April 4 2020](#april-4-2020)
 - [April 3 2020](#april-3-2020)
 - [April 2 2020](#april-2-2020)
 - [April 1 2020](#april-1-2020)
+
+## April 4 2020
+
+- Added a task queue for non-nlocking webhook POST request execution with retries
+- Updated design and added notes on Huey as the light weight task queue choice in [README](../README.md)
+
+**Run the server, task queue workers and test consumer**
+
+```
+$  python manage.py runserver
+Starting development server at http://127.0.0.1:8000/
+```
+
+```
+$ python manage.py run_huey
+[2020-04-04 14:58:31,204] INFO:huey.consumer:MainThread:Huey consumer started with 4 thread, PID 60862 at 2020-04-04 21:58:31.204599
++ hooks.views.post_url
+```
+
+```
+$ python consumer.py
+Starting webhook consumer on http://127.0.0.1:8888
+```
+
+**Trigger an event**
+
+```
+$ curl http://127.0.0.1:8000/trigger/create
+Triggering event create ...
+$
+```
+
+**Verify task execution through task queue***
+
+```
+$ python manage.py run_huey
+...
+[2020-04-04 15:06:07,930] INFO:huey:Worker-1:Executing hooks.views.post_url: 0734bcdd-7ba1-4399-b21f-b3d4c432bfe1
+Making POST request at http://localhost:8888/logging with body {'event': 'create'}
+[2020-04-04 15:06:07,968] INFO:huey:Worker-1:hooks.views.post_url: 0734bcdd-7ba1-4399-b21f-b3d4c432bfe1 executed in 0.038s
+...
+```
+
+**Kill the consumer and trigger another event**
+
+```
+$ curl http://127.0.0.1:8000/trigger/delete
+Triggering event delete ...
+$
+```
+
+**Verify task execution retries***
+
+```
+$ python manage.py run_huey
+...
+Making POST request at http://localhost:8888/alerts with body {'event': 'delete'}
+ERROR: Failed POST request at http://localhost:8888/alerts
+[2020-04-04 15:08:50,361] INFO:huey:Worker-4:Task 2bd11757-b450-4930-b7cd-90d4bf733ac4 raised RetryTask, retrying.
+Making POST request at http://localhost:8888/audit with body {'event': 'delete'}
+...
+```
+
+**Run the consumer again and verify the task queue retry succeeds**
+
+```
+$ python manage.py run_huey
+...
+[2020-04-04 15:09:53,906] INFO:huey:Worker-3:Executing hooks.views.post_url: 2bd11757-b450-4930-b7cd-90d4bf733ac4 @2020-04-04 22:08:57.463110
+Making POST request at http://localhost:8888/alerts with body {'event': 'delete'}
+[2020-04-04 15:09:53,934] INFO:huey:Worker-3:hooks.views.post_url: 2bd11757-b450-4930-b7cd-90d4bf733ac4 @2020-04-04 22:08:57.463110 executed in 0.028s
+...
+```
+
+
+```
+[2020-04-04 15:09:53,905] INFO:huey:Worker-1:Executing hooks.views.post_url: 96b4cd35-c29f-4640-a6ad-bab9a95d5985 @2020-04-04 22:08:57.459626
+Making POST request at http://localhost:8888/logging with body {'event': 'delete'}
+[2020-04-04 15:09:53,906] INFO:huey:Worker-3:Executing hooks.views.post_url: 2bd11757-b450-4930-b7cd-90d4bf733ac4 @2020-04-04 22:08:57.463110
+Making POST request at http://localhost:8888/alerts with body {'event': 'delete'}
+[2020-04-04 15:09:53,907] INFO:huey:Worker-2:Executing hooks.views.post_url: dbf6a853-af20-4018-9058-d34ce0d03250 @2020-04-04 22:08:57.465939
+Making POST request at http://localhost:8888/audit with body {'event': 'delete'}
+[2020-04-04 15:09:53,934] INFO:huey:Worker-3:hooks.views.post_url: 2bd11757-b450-4930-b7cd-90d4bf733ac4 @2020-04-04 22:08:57.463110 executed in 0.028s
+[2020-04-04 15:09:53,935] INFO:huey:Worker-1:hooks.views.post_url: 96b4cd35-c29f-4640-a6ad-bab9a95d5985 @2020-04-04 22:08:57.459626 executed in 0.031s
+[2020-04-04 15:09:53,936] INFO:huey:Worker-2:hooks.views.post_url: dbf6a853-af20-4018-9058-d34ce0d03250 @2020-04-04 22:08:57.465939 executed in 0.028s
+```
 
 ## April 3 2020
 
