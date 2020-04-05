@@ -3,11 +3,13 @@ from collections import defaultdict
 
 import requests
 from django.http import HttpResponse
+from django.shortcuts import render, redirect, get_object_or_404
 from django.template import loader
 from django.template.defaulttags import register
 from huey import RetryTask
 from huey.contrib.djhuey import task
 
+from .forms import WebhookForm
 from .models import Event
 from .models import Webhook
 
@@ -23,26 +25,28 @@ def get_item(dictionary, key):
 
 
 def index(request):
-    template = loader.get_template('hooks/index.html')
     webhooks = Webhook.objects.all()
     events = Event.objects.all()
     webhooks_events = defaultdict(list)
     for event in events.all():
         for hook in Webhook.objects.filter(events__name=event):
             webhooks_events[event.name].append(hook.name)
-    print(webhooks_events)
     context = {
         'webhooks': webhooks,
         'events': events,
         'webhooks_events': webhooks_events
     }
-    return HttpResponse(template.render(context, request))
+    return render(request, 'hooks/index.html', context)
 
 
 def trigger(request, event):
-    response = "Triggering event %s ..."
-    schedule_webhooks_for_event(event)
-    return HttpResponse(response % event)
+    return render(request, 'hooks/trigger.html', {'event': event})
+
+
+def schedule_webhooks_for_event(event):
+    for hook in Webhook.objects.filter(events__name=event):
+        logger.info("Adding webhook=%s for event=%s to task queue", hook.name, event)
+        post_url(hook.url, event)
 
 
 @task(retry_delay=HTTP_POST_REQUEST_RETRY_DELAY)
@@ -59,7 +63,31 @@ def post_url(url, event):
         raise RetryTask()  # Queues the task for retry
 
 
-def schedule_webhooks_for_event(event):
-    for hook in Webhook.objects.filter(events__name=event):
-        logger.info("Adding webhook=%s for event=%s to task queue", hook.name, event)
-        post_url(hook.url, event)
+def webhook_view(request, pk):
+    webhook = get_object_or_404(Webhook, pk=pk)
+    return render(request, 'hooks/webhook_view.html', {'webhook': webhook})
+
+
+def webhook_new(request):
+    if request.method == "POST":
+        form = WebhookForm(request.POST)
+        if form.is_valid():
+            webhook = form.save(commit=False)
+            webhook.save()
+            return redirect('webhook_view', pk=webhook.pk)
+    else:
+        form = WebhookForm()
+    return render(request, 'hooks/webhook_edit.html', {'form': form})
+
+
+def webhook_edit(request, pk):
+    webhook = get_object_or_404(Webhook, pk=pk)
+    if request.method == "POST":
+        form = WebhookForm(request.POST, instance=webhook)
+        if form.is_valid():
+            webhook = form.save(commit=False)
+            webhook.save()
+            return redirect('webhook_view', pk=webhook.pk)
+    else:
+        form = WebhookForm(instance=webhook)
+    return render(request, 'hooks/webhook_edit.html', {'form': form})

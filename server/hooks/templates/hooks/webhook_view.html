@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>View webhook</title>
+</head>
+<body>
+
+<h2>View Webhook</h2>
+
+{% if webhook %}
+<table border="1">
+    <tr>
+        <th>Name</th>
+        <th>URL</th>
+        <th>Edit</th>
+    </tr>
+    <tr>
+        <td>{{ webhook.name }}</td>
+        <td>{{ webhook.url }}</td>
+        <td><a href="{% url 'webhook_edit' pk=webhook.pk %}">Edit</a></td>
+    </tr>
+</table>
+{% else %}
+<p>No webhook to edit</p>
+{% endif %}
+
+</br>
+</br>
+
+<table border="0">
+    <tr>
+        <td><a href="{% url 'index' %}"><img src="{% static "hooks/webhooks-logo-transparent.png" %}" alt="Home"
+            width="20px"></a></td>
+        <td><a href="{% url 'index' %}">Home</a></td>
+    </tr>
+</table>
+
+</body>
+</html>

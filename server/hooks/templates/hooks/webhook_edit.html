@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit webhook</title>
+</head>
+<body>
+
+<h2>Edit webhook</h2>
+
+<form method="post">{% csrf_token %}
+    {{ form }}
+    <button type="Submit">Save</button>
+</form>
+
+</br>
+</br>
+
+<table border="0">
+    <tr>
+        <td><a href="{% url 'index' %}"><img src="{% static "hooks/webhooks-logo-transparent.png" %}" alt="Home"
+            width="20px"></a></td>
+        <td><a href="{% url 'index' %}">Home</a></td>
+    </tr>
+</table>
+
+</body>
+</html>

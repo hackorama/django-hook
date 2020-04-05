@@ -1,13 +1,15 @@
-<html>
-<header>
-    <title>Hooks</title>
-</header>
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hooks Home</title>
+</head>
 <body>
 
 <h1>Hooks</h1>
 <h3>A Webhook Manager</h3>
 
-{% load static %}
 <img src="{% static "hooks/webhooks-logo-transparent.png" %}" alt="Webhooks Logo" width="100px">
 
 <h4>Created webhooks</h4>
@@ -31,9 +33,10 @@
 
 <h4>Register new webhooks</h4>
 
+<a href="{% url 'webhook_new'  %}">Register new webhook</a>
+
 <p>
-    Please register new webhooks with events using the <a href="/admin">Admin</a> interface.
-    Webhook registration screen is coming in next version.
+    <i>NOTE: Can also be updated/created through the <a href="/admin">Admin</a> interface along with events.</i>
 </p>
 
 <h4>Webhooks registered for events</h4>
@@ -72,7 +75,7 @@
 <ul>
     {% if events %}
     {% for event in events %}
-    <li><a href="trigger/{{ event.name }}">Trigger {{ event }} event</a></li>
+    <li><a href="{% url 'trigger' event=event.name %}">Trigger {{ event }} event</a></li>
     {% endfor %}
     {% else %}
     <p>No events available</p>
@@ -80,7 +83,7 @@
 </ul>
 
 <p>
-    Please check the server logs, task queue logs and consumer logs to observe the webhook execution.
+    <i>Please check the server logs, task queue logs and consumer logs to observe the webhook execution.<i>
 </p>
 
 </body>
