@@ -12,18 +12,22 @@
 
 <img src="{% static "hooks/webhooks-logo-transparent.png" %}" alt="Webhooks Logo" width="100px">
 
-<h4>Created webhooks</h4>
+<h4>Registered webhooks</h4>
 
 {% if webhooks %}
 <table border="1">
     <tr>
         <th>Name</th>
         <th>URL</th>
+        <th>View</th>
+        <th>Edit</th>
     </tr>
     {% for webhook in webhooks %}
     <tr>
         <td>{{ webhook.name }}</td>
         <td>{{ webhook.url }}</td>
+        <td><a href="{% url 'webhook_view' pk=webhook.pk %}">View</a></td>
+        <td><a href="{% url 'webhook_edit' pk=webhook.pk %}">Edit</a></td>
     </tr>
     {% endfor %}
 </table>
@@ -33,7 +37,7 @@
 
 <h4>Register new webhooks</h4>
 
-<a href="{% url 'webhook_new'  %}">Register new webhook</a>
+<a href="{% url 'webhook_new'  %}">Register</a>
 
 <p>
     <i>NOTE: Can also be updated/created through the <a href="/admin">Admin</a> interface along with events.</i>

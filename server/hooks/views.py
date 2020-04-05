@@ -2,9 +2,7 @@ import logging
 from collections import defaultdict
 
 import requests
-from django.http import HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
-from django.template import loader
 from django.template.defaulttags import register
 from huey import RetryTask
 from huey.contrib.djhuey import task
@@ -65,7 +63,8 @@ def post_url(url, event):
 
 def webhook_view(request, pk):
     webhook = get_object_or_404(Webhook, pk=pk)
-    return render(request, 'hooks/webhook_view.html', {'webhook': webhook})
+    events = webhook.events.all()  # TODO Optimize related lookup query
+    return render(request, 'hooks/webhook_view.html', {'webhook': webhook, 'events': events})
 
 
 def webhook_new(request):
