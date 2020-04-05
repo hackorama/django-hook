@@ -1,11 +1,14 @@
 import logging
+from collections import defaultdict
 
 import requests
 from django.http import HttpResponse
 from django.template import loader
+from django.template.defaulttags import register
 from huey import RetryTask
 from huey.contrib.djhuey import task
 
+from .models import Event
 from .models import Webhook
 
 logger = logging.getLogger(__name__)
@@ -14,9 +17,25 @@ logger = logging.getLogger(__name__)
 HTTP_POST_REQUEST_RETRY_DELAY = 3
 
 
+@register.filter
+def get_item(dictionary, key):
+    return dictionary.get(key)
+
+
 def index(request):
     template = loader.get_template('hooks/index.html')
-    context = {}
+    webhooks = Webhook.objects.all()
+    events = Event.objects.all()
+    webhooks_events = defaultdict(list)
+    for event in events.all():
+        for hook in Webhook.objects.filter(events__name=event):
+            webhooks_events[event.name].append(hook.name)
+    print(webhooks_events)
+    context = {
+        'webhooks': webhooks,
+        'events': events,
+        'webhooks_events': webhooks_events
+    }
     return HttpResponse(template.render(context, request))
 
 

@@ -7,22 +7,80 @@
 <h1>Hooks</h1>
 <h3>A Webhook Manager</h3>
 
+{% load static %}
+<img src="{% static "hooks/webhooks-logo-transparent.png" %}" alt="Webhooks Logo" width="100px">
+
+<h4>Created webhooks</h4>
+
+{% if webhooks %}
+<table border="1">
+    <tr>
+        <th>Name</th>
+        <th>URL</th>
+    </tr>
+    {% for webhook in webhooks %}
+    <tr>
+        <td>{{ webhook.name }}</td>
+        <td>{{ webhook.url }}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% else %}
+<p>No webhooks registered</p>
+{% endif %}
+
+<h4>Register new webhooks</h4>
+
 <p>
-    Register new webhook URLs with events using <a href="/admin">Admin</a> interface.
+    Please register new webhooks with events using the <a href="/admin">Admin</a> interface.
+    Webhook registration screen is coming in next version.
 </p>
+
+<h4>Webhooks registered for events</h4>
+
+{% if webhooks_events %}
+<table border="1">
+    <tr>
+        <th>Event</th>
+        <th>Registered webhooks</th>
+    </tr>
+    {% for event in events %}
+    {% if webhooks_events %}
+    <tr>
+        <td> {{ event.name }}</td>
+        <td>
+            <ul>
+                {% for webhook in webhooks_events|get_item:event.name %}
+                <li>{{ webhook }}</li>
+                {% endfor %}
+            </ul>
+        </td>
+    </tr>
+    {% endif %}
+    {% endfor %}
+</table>
+{% else %}
+<p>No events available</p>
+{% endif %}
+
+<h4>Trigger events</h4>
+
 <p>
-    Following events are pre-defined and can be triggered which will execute the registered webhooks for the event.
+    Trigger an event to execute the registered webhooks for the event.
 </p>
 
 <ul>
-    <li>Trigger <a href="trigger/create">Create</a> Event</li>
-    <li>Trigger <a href="trigger/delete">Delete</a> Event</li>
-    <li>Trigger <a href="trigger/update">Update</a> Event</li>
-    <li>Trigger <a href="trigger/read">Read</a> Event</li>
+    {% if events %}
+    {% for event in events %}
+    <li><a href="trigger/{{ event.name }}">Trigger {{ event }} event</a></li>
+    {% endfor %}
+    {% else %}
+    <p>No events available</p>
+    {% endif %}
 </ul>
 
 <p>
-    This is a minimal interface please check the server logs, task queue logs and consumer logs to verify the webhook execution.
+    Please check the server logs, task queue logs and consumer logs to observe the webhook execution.
 </p>
 
 </body>
