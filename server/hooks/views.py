@@ -2,6 +2,7 @@ import logging
 
 import requests
 from django.http import HttpResponse
+from django.template import loader
 from huey import RetryTask
 from huey.contrib.djhuey import task
 
@@ -14,7 +15,9 @@ HTTP_POST_REQUEST_RETRY_DELAY = 3
 
 
 def index(request):
-    return HttpResponse("Webhooks Manager")
+    template = loader.get_template('hooks/index.html')
+    context = {}
+    return HttpResponse(template.render(context, request))
 
 
 def trigger(request, event):
