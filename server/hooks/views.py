@@ -1,3 +1,4 @@
+import datetime
 import logging
 from collections import defaultdict
 
@@ -37,22 +38,29 @@ def index(request):
     return render(request, 'hooks/index.html', context)
 
 
-def trigger(request, event):
-    return render(request, 'hooks/trigger.html', {'event': event})
+def trigger(request, name):
+    event = Event.objects.filter(name=name).first()  # Avoiding DoesNotExist handling
+    if event is None:
+        logger.error("Cannot trigger invalid event=%s", name)
+    else:
+        schedule_webhooks_for_event(event)
+    return render(request, 'hooks/trigger.html', {'name': name, 'event': event})
 
 
 def schedule_webhooks_for_event(event):
-    for hook in Webhook.objects.filter(events__name=event):
-        logger.info("Adding webhook=%s for event=%s to task queue", hook.name, event)
-        post_url(hook.url, event)
+    now = datetime.datetime.now().strftime("%Y-%m-%dT%H:%M:%S.%f")
+    payload = {'event': event.name, 'time': now}
+    for webhook in Webhook.objects.filter(events__name=event.name):
+        logger.info("Adding webhook \"%s\" (%s) with payload \"%s\" to task queue", webhook.name, webhook.url, payload)
+        post_url(webhook.url, payload)
 
 
 @task(retry_delay=HTTP_POST_REQUEST_RETRY_DELAY)
-def post_url(url, event):
-    payload = {'event': event}
+def post_url(url, payload):
     logger.info("Requesting POST %s %s", url, payload)
+    headers = {'Content-type': 'application/json', 'Accept': 'text/plain'}
     try:
-        response = requests.post(url=url, data=payload)
+        response = requests.post(url=url, data=payload, headers=headers)
         if response.status_code not in range(200, 299):  # TODO Better check for valid 2xx codes
             logger.warning("Unexpected response code %s from %s", response.status_code, url)
             raise RetryTask()  # Queues the task for retry

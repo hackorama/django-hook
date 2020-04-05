@@ -83,7 +83,7 @@
 <ul>
     {% if events %}
     {% for event in events %}
-    <li><a href="{% url 'trigger' event=event.name %}">Trigger {{ event }} event</a></li>
+    <li><a href="{% url 'trigger' name=event.name %}">Trigger {{ event }} event</a></li>
     {% endfor %}
     {% else %}
     <p>No events available</p>
