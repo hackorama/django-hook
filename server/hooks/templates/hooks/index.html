@@ -35,6 +35,10 @@
 <p>No webhooks registered</p>
 {% endif %}
 
+<p>
+    Webhook deleting is restricted to <a href="/admin">Admin</a>.
+</p>
+
 <h4>Register new webhooks</h4>
 
 <a href="{% url 'webhook_new'  %}">Register</a>
@@ -67,7 +71,7 @@
 {% endif %}
 
 <p>
-    Edit/add events using the <a href="/admin">Admin</a> interface.
+    Event editing is restricted to <a href="/admin">Admin</a>.
 </p>
 
 <h4>Trigger events</h4>
