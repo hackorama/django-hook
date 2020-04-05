@@ -39,10 +39,6 @@
 
 <a href="{% url 'webhook_new'  %}">Register</a>
 
-<p>
-    <i>NOTE: Can also be updated/created through the <a href="/admin">Admin</a> interface along with events.</i>
-</p>
-
 <h4>Webhooks registered for events</h4>
 
 {% if webhooks_events %}
@@ -69,6 +65,10 @@
 {% else %}
 <p>No events available</p>
 {% endif %}
+
+<p>
+    Edit/add events using the <a href="/admin">Admin</a> interface.
+</p>
 
 <h4>Trigger events</h4>
 
