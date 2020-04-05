@@ -44,9 +44,9 @@ $
 ```
 $ python manage.py run_huey
 ...
-[2020-04-04 15:06:07,930] INFO:huey:Worker-1:Executing hooks.views.post_url: 0734bcdd-7ba1-4399-b21f-b3d4c432bfe1
+[2020-04-04 15:06:07,930] INFO:huey:Worker-1:Executing hooks.views.post_url: b3d4c432bfe1
 Making POST request at http://localhost:8888/logging with body {'event': 'create'}
-[2020-04-04 15:06:07,968] INFO:huey:Worker-1:hooks.views.post_url: 0734bcdd-7ba1-4399-b21f-b3d4c432bfe1 executed in 0.038s
+[2020-04-04 15:06:07,968] INFO:huey:Worker-1:hooks.views.post_url: b3d4c432bfe1 executed in 0.038s
 ...
 ```
 
@@ -65,7 +65,7 @@ $ python manage.py run_huey
 ...
 Making POST request at http://localhost:8888/alerts with body {'event': 'delete'}
 ERROR: Failed POST request at http://localhost:8888/alerts
-[2020-04-04 15:08:50,361] INFO:huey:Worker-4:Task 2bd11757-b450-4930-b7cd-90d4bf733ac4 raised RetryTask, retrying.
+[2020-04-04 15:08:50,361] INFO:huey:Worker-4:Task 90d4bf733ac4 raised RetryTask, retrying.
 Making POST request at http://localhost:8888/audit with body {'event': 'delete'}
 ...
 ```
@@ -75,9 +75,9 @@ Making POST request at http://localhost:8888/audit with body {'event': 'delete'}
 ```
 $ python manage.py run_huey
 ...
-[2020-04-04 15:09:53,906] INFO:huey:Worker-3:Executing hooks.views.post_url: 2bd11757-b450-4930-b7cd-90d4bf733ac4 @2020-04-04 22:08:57.463110
+[2020-04-04 15:09:53,906] INFO:huey:Worker-3:Executing hooks.views.post_url: 90d4bf733ac4 @2020-04-04 22:08:57.463110
 Making POST request at http://localhost:8888/alerts with body {'event': 'delete'}
-[2020-04-04 15:09:53,934] INFO:huey:Worker-3:hooks.views.post_url: 2bd11757-b450-4930-b7cd-90d4bf733ac4 @2020-04-04 22:08:57.463110 executed in 0.028s
+[2020-04-04 15:09:53,934] INFO:huey:Worker-3:hooks.views.post_url: 90d4bf733ac4 @2020-04-04 22:08:57 executed in 0.028s
 ...
 ```
 
