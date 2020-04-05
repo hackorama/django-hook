@@ -81,19 +81,6 @@ Making POST request at http://localhost:8888/alerts with body {'event': 'delete'
 ...
 ```
 
-
-```
-[2020-04-04 15:09:53,905] INFO:huey:Worker-1:Executing hooks.views.post_url: 96b4cd35-c29f-4640-a6ad-bab9a95d5985 @2020-04-04 22:08:57.459626
-Making POST request at http://localhost:8888/logging with body {'event': 'delete'}
-[2020-04-04 15:09:53,906] INFO:huey:Worker-3:Executing hooks.views.post_url: 2bd11757-b450-4930-b7cd-90d4bf733ac4 @2020-04-04 22:08:57.463110
-Making POST request at http://localhost:8888/alerts with body {'event': 'delete'}
-[2020-04-04 15:09:53,907] INFO:huey:Worker-2:Executing hooks.views.post_url: dbf6a853-af20-4018-9058-d34ce0d03250 @2020-04-04 22:08:57.465939
-Making POST request at http://localhost:8888/audit with body {'event': 'delete'}
-[2020-04-04 15:09:53,934] INFO:huey:Worker-3:hooks.views.post_url: 2bd11757-b450-4930-b7cd-90d4bf733ac4 @2020-04-04 22:08:57.463110 executed in 0.028s
-[2020-04-04 15:09:53,935] INFO:huey:Worker-1:hooks.views.post_url: 96b4cd35-c29f-4640-a6ad-bab9a95d5985 @2020-04-04 22:08:57.459626 executed in 0.031s
-[2020-04-04 15:09:53,936] INFO:huey:Worker-2:hooks.views.post_url: dbf6a853-af20-4018-9058-d34ce0d03250 @2020-04-04 22:08:57.465939 executed in 0.028s
-```
-
 ## April 3 2020
 
 - Added a simple webhook consumer HTTP serer for testing
