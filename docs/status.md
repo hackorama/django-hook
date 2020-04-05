@@ -7,10 +7,13 @@
 
 ## April 4 2020
 
-- Added a task queue for non-nlocking webhook POST request execution with retries
+- Added a task queue for non-nlocking webhook POST request execution with retries (see below for details)
+- Added a Django template index page listing webhooks, events and trigger links
 - Updated design and added notes on Huey as the light weight task queue choice in [README](../README.md)
 
-**Run the server, task queue workers and test consumer**
+![Main web page](screenshots/main-web-page.png)
+
+**Test task queue execution - set up server, queue workers and consumer**
 
 ```
 $  python manage.py runserver
