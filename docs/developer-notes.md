@@ -198,3 +198,53 @@ Executing create ...
 ...
 ````
 
+
+## uWSGI
+
+```shell script
+$ python -m pip install uwsgi
+...
+    ld: warning: ignoring file /usr/local/lib/libz.dylib, building for macOS-x86_64 but attempting to link with file built for unknown-i386
+    Undefined symbols for architecture x86_64:
+      "_compress", referenced from:
+...
+    ld: symbol(s) not found for architecture x86_64
+    clang: error: linker command failed with exit code 1 (use -v to see invocation)
+    *** error linking uWSGI ***
+...
+```
+
+```shell script
+$ brew install zlib
+Updating Homebrew...
+...
+==> Downloading https://homebrew.bintray.com/bottles/zlib-1.2.11.catalina.bottle.tar.gz
+######################################################################## 100.0%
+==> Pouring zlib-1.2.11.catalina.bottle.tar.gz
+==> Caveats
+zlib is keg-only, which means it was not symlinked into /usr/local,
+because macOS already provides this software and installing another version in
+parallel can cause all kinds of trouble.
+
+For compilers to find zlib you may need to set:
+  export LDFLAGS="-L/usr/local/opt/zlib/lib"
+  export CPPFLAGS="-I/usr/local/opt/zlib/include"
+
+For pkg-config to find zlib you may need to set:
+  export PKG_CONFIG_PATH="/usr/local/opt/zlib/lib/pkgconfig"
+
+==> Summary
+🍺  /usr/local/Cellar/zlib/1.2.11: 12 files, 376.4KB
+```
+
+```shell script
+$ export LDFLAGS="-L/usr/local/opt/zlib/lib"
+$ export CPPFLAGS="-I/usr/local/opt/zlib/include"
+
+$ python -m pip install uwsgi
+Collecting uwsgi
+  Using cached https://files.pythonhosted.org/packages/e7/1e/3dcca007f974fe4eb369bf1b8629d5e342bb3055e2001b2e5340aaefae7a/uwsgi-2.0.18.tar.gz
+Installing collected packages: uwsgi
+  Running setup.py install for uwsgi ... done
+Successfully installed uwsgi-2.0.18
+```
