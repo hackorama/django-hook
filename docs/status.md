@@ -12,6 +12,7 @@
 - Added webhook registration (view/new/update) form web interfaces
 - Completed the user interface flow between pages
 - Improved event triggering
+- Added quick start steps to [README](../README.md)
 
 Run the Django server with task queue worker and test consumer
 

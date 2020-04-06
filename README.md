@@ -7,6 +7,7 @@ A simple [webhooks](https://en.wikipedia.org/wiki/Webhook) demo application usin
 
 > See current [project status](docs/status.md) :clipboard: 
 >
+- [Quick Start](#quick-start)
 - [High Level Requirements](#high-level-requirements)
 - [Functional Design](#functional-design)
 - [Application Design](#server-application-design)
@@ -14,6 +15,58 @@ A simple [webhooks](https://en.wikipedia.org/wiki/Webhook) demo application usin
 - [Deployment](#server-application-deployment)
 - [Project Status](docs/status.md)
 - [Developer Notes](docs/developer-notes.md)
+
+## Quick Start
+
+> See [latest status](docs/status.md) for updates
+
+Setup Python
+
+```
+$ python --version
+Python 3.7.7
+```
+
+```
+$ python -m venv venv
+$ source venv/bin/activate
+```
+
+Install modules
+
+```
+$ pip install -r requirements.txt
+```
+
+Initialize database
+
+```
+$ cd server
+$ python manage.py migrate
+```
+
+Run task queue workers
+
+```
+$ python manage.py run_huey
+```
+
+Start Django webhook server on 8000
+
+```
+$ python manage.py runserver
+Starting development server at http://127.0.0.1:8000/
+```
+
+Open [http://127.0.0.1:8000](http://127.0.0.1:8000) on browser
+
+Start a test webhook consumer on port 8888
+
+```
+$ cd consumer
+$ python consumer.py
+Starting webhook consumer on http://127.0.0.1:8888/
+```
 
 ## High level requirements
 
