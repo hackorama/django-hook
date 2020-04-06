@@ -10,11 +10,24 @@
 <h2>Edit webhook</h2>
 
 <form method="post">{% csrf_token %}
-    {{ form }}
+    <table>
+        <tr>
+            <td>Name</td>
+            <td>{{ form.name }}</td>
+       </tr>
+        <tr>
+            <td>URL</td>
+            <td>{{ form.url }}</td>
+        </tr>
+        <tr>
+            <td>Events</td>
+            <td>{{ form.events }}</td>
+        </tr>
+    </table>
     <button type="Submit">Save</button>
 </form>
 </br>
-<i>Hold down “Control”/“Command” or "Shift" keys to select one or more events from the list.</i>
+<i>Hold down “Control”/“Command” or "Shift" keys to select one or more event/s from the events list.</i>
 
 </br>
 </br>
