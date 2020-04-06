@@ -60,7 +60,17 @@ Starting development server at http://127.0.0.1:8000/
 
 Open [http://127.0.0.1:8000](http://127.0.0.1:8000) on browser
 
-Start a test webhook consumer on port 8888
+![Main web page](docs/screenshots/webhook-registration.png)
+
+Add events using app admin [http://127.0.0.1:8000/admin](http://127.0.0.1:8000/admin) interface so we can test webhhoks.
+
+Register webhooks from main app page [http://127.0.0.1:8000](http://127.0.0.1:8000) to test, using URLs pointing to test
+server and link to events.
+
+Example URL: `http://127.0.0.1:8888/test/one`
+
+Start a test webhook consumer on port 8888 and trigger events from main app page
+[http://127.0.0.1:8000](http://127.0.0.1:8000)
 
 ```
 $ cd consumer
