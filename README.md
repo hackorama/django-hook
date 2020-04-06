@@ -113,11 +113,7 @@ This is a demo client application that can receive/consume a set of webhooks use
 
 ### Webhook registration
 
-Using the Django admin to do the event and webhook creation and registration during the testing.
-
-![Add Webhooks](docs/screenshots/add-webhook.png)
-
-[See more screenshots](docs/status.md#april-2-2020)
+Webhooks are created and linked one or more of the event/s.
 
 ### Event triggering
 
