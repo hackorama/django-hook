@@ -1,9 +1,54 @@
 # Status
 
+- [April 5 2020](#april-5-2020)
 - [April 4 2020](#april-4-2020)
 - [April 3 2020](#april-3-2020)
 - [April 2 2020](#april-2-2020)
 - [April 1 2020](#april-1-2020)
+
+## April 5 2020
+
+- First feature complete milestone
+- Added webhook registration (view/new/update) form web interfaces
+- Completed the user interface flow between pages
+- Improved event triggering
+
+Run the Django server with task queue worker and test consumer
+
+```
+$ python consumer.py 
+Starting webhook consumer on http://127.0.0.1:8888 ...
+```
+
+```
+$ python manage.py run_huey
+...
+The following commands are available:
++ hooks.views.post_url
+```
+
+```
+$ python manage.py runserver
+Starting development server at http://127.0.0.1:8000/
+```
+
+Open [http://127.0.0.1:8000/](http://127.0.0.1:8000/) on browser ...
+
+![Main web page](screenshots/webhook-registration.png)
+
+Observe the webhook execution from task queue and test consumer logs
+
+```
+Requesting POST http://localhost:8888/logging {'event': 'update', 'time': '2020-04-05T17:25:59.272603'}
+[2020-04-05 17:26:01,051] INFO:huey:Worker-1:Executing hooks.views.post_url: 70ba1f46-bed2-4c1b-b294-9f0c4920d849
+```
+
+```
+Received POST /logging event=update&time=2020-04-05T17%3A25%3A59.272603
+```
+
+
+
 
 ## April 4 2020
 
