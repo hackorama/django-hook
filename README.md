@@ -158,5 +158,6 @@ deployment.
 - Dockerizing the deployment
 - Code quality - unit tests, docstrings, pylint etc.
 - Update test consumer to test non 2xx response code easily
+- Add a CSS file for better formatting of the web interface pages
 - Add a REST API interface for webhoock registration (stretch goal)
 
