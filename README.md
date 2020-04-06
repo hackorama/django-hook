@@ -1,9 +1,9 @@
 # Django Hook
 
-A simple [webhooks](https://en.wikipedia.org/wiki/Webhook) demo application using
-[Django](https://www.djangoproject.com) deployed using
-[uWSGI caching](https://uwsgi-docs.readthedocs.io/en/latest/Caching.html) for
-[QuerySets](https://docs.djangoproject.com/en/3.0/ref/models/querysets/) 
+A simple [webhooks](https://en.wikipedia.org/wiki/Webhook) manager with event  triggering.
+
+Built using [Django](https://www.djangoproject.com) web framework and [Huey](https://huey.readthedocs.io/en/latest/)
+task queue.
 
 > See current [project status](docs/status.md) :clipboard: 
 >
