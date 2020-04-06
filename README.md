@@ -61,7 +61,7 @@ Starting development server at http://127.0.0.1:8000/
 
 Open [http://127.0.0.1:8000](http://127.0.0.1:8000) on browser
 
-![Main web page](docs/screenshots/webhook-registration.png)
+![Main web page](docs/screenshots/webhook-app.png)
 
 Add events using app admin [http://127.0.0.1:8000/admin](http://127.0.0.1:8000/admin) interface so we can test webhhoks.
 

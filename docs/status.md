@@ -17,7 +17,7 @@
 Run the Django server with task queue worker and test consumer
 
 ```
-$ python consumer.py 
+$ python consumer.py
 Starting webhook consumer on http://127.0.0.1:8888 ...
 ```
 
@@ -35,7 +35,7 @@ Starting development server at http://127.0.0.1:8000/
 
 Open [http://127.0.0.1:8000/](http://127.0.0.1:8000/) on browser ...
 
-![Main web page](screenshots/webhook-registration.png)
+![Main web page](screenshots/webhook-app.png)
 
 Observe the webhook execution from task queue and test consumer logs
 
