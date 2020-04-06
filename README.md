@@ -14,6 +14,7 @@ A simple [webhooks](https://en.wikipedia.org/wiki/Webhook) demo application usin
 - [Data layer](#server-application-data-layer)
 - [Deployment](#server-application-deployment)
 - [Project Status](docs/status.md)
+- [TODO](#todo)
 - [Developer Notes](docs/developer-notes.md)
 
 ## Quick Start
@@ -144,10 +145,18 @@ implemented through ORM layer using data [models](https://docs.djangoproject.com
 
 ## Server application deployment
 
+> This is a stretch goal to integrate uWSGI and NGINX
+
 The server application will be configured to be deployed using
 [uWSGI](https://uwsgi-docs.readthedocs.io/en/latest/WSGIquickstart.html) and [NGINX](https://www.nginx.com)
 With uWSGI configured to enable caching.
 The application with the uWSGI and NGINX servers will be packaged as a Docker image with all dependencies for quick
 deployment.
 
+## TODO
+
+- Dockerizing the deployment
+- Code quality - unit tests, docstrings, pylint etc.
+- Update test consumer to test non 2xx response code easily
+- Add a REST API interface for webhoock registration (stretch goal)
 
