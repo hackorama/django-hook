@@ -46,6 +46,12 @@ $ cd server
 $ python manage.py migrate
 ```
 
+Create admin user
+
+```
+$ python manage.py createsuperuser
+```
+
 Run task queue workers
 
 ```
