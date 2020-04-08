@@ -162,6 +162,7 @@ deployment.
 ## TODO
 
 - Dockerizing the deployment
+- Add a fixture for initializing db with few test events and webhooks
 - Code quality - unit tests, docstrings, pylint etc.
 - Update test consumer to test non 2xx response code easily
 - Add a CSS file for better formatting of the web interface pages
