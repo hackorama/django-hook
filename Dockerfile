@@ -1,10 +1,12 @@
 FROM python:3.7
 
 WORKDIR /server
+
 COPY server /server
 ADD requirements.txt requirements.txt
 ADD consumer/consumer.py consumer.py
 ADD entrypoint.sh entrypoint.sh
+
 RUN chmod a+x entrypoint.sh
 RUN python -m pip install -r requirements.txt
 
