@@ -81,6 +81,7 @@ def webhook_new(request):
         if form.is_valid():
             webhook = form.save(commit=False)
             webhook.save()
+            form.save_m2m()
             return redirect('webhook_view', pk=webhook.pk)
     else:
         form = WebhookForm()
@@ -94,6 +95,7 @@ def webhook_edit(request, pk):
         if form.is_valid():
             webhook = form.save(commit=False)
             webhook.save()
+            form.save_m2m()
             return redirect('webhook_view', pk=webhook.pk)
     else:
         form = WebhookForm(instance=webhook)
