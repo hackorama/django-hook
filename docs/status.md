@@ -1,10 +1,22 @@
 # Status
 
+- [April 9 2020](#april-9-2020)
 - [April 5 2020](#april-5-2020)
 - [April 4 2020](#april-4-2020)
 - [April 3 2020](#april-3-2020)
 - [April 2 2020](#april-2-2020)
 - [April 1 2020](#april-1-2020)
+
+## April 9 2020
+
+- Dockerized with a simple [single image](docker.md)
+- Added a fixture json for seeding sample initial data to the database
+- Added a CSS style sheet and changed the main page layout
+- Updated test consumer to send custom response code for testing failure retry
+- Fixed form saving of webhook to event relation
+- Updated [python venv steps](python-venv.md) for developers
+
+![Main Page](screenshots/main-web-page.png)
 
 ## April 5 2020
 
