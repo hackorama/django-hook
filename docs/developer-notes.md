@@ -234,7 +234,7 @@ For pkg-config to find zlib you may need to set:
   export PKG_CONFIG_PATH="/usr/local/opt/zlib/lib/pkgconfig"
 
 ==> Summary
-🍺  /usr/local/Cellar/zlib/1.2.11: 12 files, 376.4KB
+/usr/local/Cellar/zlib/1.2.11: 12 files, 376.4KB
 ```
 
 ```shell script
@@ -247,4 +247,23 @@ Collecting uwsgi
 Installing collected packages: uwsgi
   Running setup.py install for uwsgi ... done
 Successfully installed uwsgi-2.0.18
+```
+
+## Django REST Framework
+
+```shell script
+$ pyton -m pip install djangorestframework
+```
+
+```shell script
+$ vi server/settings.py
+...
+INSTALLED_APPS = [
+    'rest_framework',
+...
+REST_FRAMEWORK = {
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 10
+}
+...
 ```
