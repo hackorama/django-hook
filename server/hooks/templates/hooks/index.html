@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Hooks Home</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'hooks/style.css' %}">
 </head>
 <body>
 
@@ -15,7 +16,7 @@
 <h4>Registered webhooks</h4>
 
 {% if webhooks %}
-<table border="1">
+<table border="1" padding="10px">
     <tr>
         <th>Name</th>
         <th>URL</th>
@@ -36,31 +37,37 @@
 {% endif %}
 
 <p>
+    <a href="{% url 'webhook_new'  %}">Register new webhook</a>
+</p>
+
+<p>
     Webhook deleting is restricted to <a href="/admin">Admin</a>.
 </p>
 
-<h4>Register new webhooks</h4>
-
-<a href="{% url 'webhook_new'  %}">Register</a>
-
 <h4>Webhooks registered for events</h4>
+
+<p>
+    Trigger an event to execute the registered webhooks for the event.
+</p>
 
 {% if webhooks_events %}
 <table border="1">
     <tr>
         <th>Event</th>
         <th>Registered webhooks</th>
+        <th>Trogger event</th>
     </tr>
     {% for event in events %}
     {% if webhooks_events %}
     <tr>
         <td> {{ event.name }}</td>
         <td>
-            <ul>
-                {% for webhook in webhooks_events|get_item:event.name %}
-                <li>{{ webhook }}</li>
-                {% endfor %}
-            </ul>
+            {% for webhook in webhooks_events|get_item:event.name %}
+            {{ webhook }},
+            {% endfor %}
+        </td>
+        <td>
+            <a href="{% url 'trigger' name=event.name %}">Trigger {{ event }}</a>
         </td>
     </tr>
     {% endif %}
@@ -74,21 +81,8 @@
     Event editing is restricted to <a href="/admin">Admin</a>.
 </p>
 
-<h4>Trigger events</h4>
-
-<p>
-    Trigger an event to execute the registered webhooks for the event.
-</p>
-
-<ul>
-    {% if events %}
-    {% for event in events %}
-    <li><a href="{% url 'trigger' name=event.name %}">Trigger {{ event }} event</a></li>
-    {% endfor %}
-    {% else %}
-    <p>No events available</p>
-    {% endif %}
-</ul>
+<br>
+<br>
 
 <p>
     <i>Please check the server logs, task queue logs and consumer logs to observe the webhook execution.<i>
