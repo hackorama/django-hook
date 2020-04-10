@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'huey.contrib.djhuey',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
@@ -149,4 +150,12 @@ HUEY = {
         'workers': 4,
         'worker_type': 'thread',
     },
+}
+
+
+# Django REST Framework
+
+REST_FRAMEWORK = {
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 10
 }
