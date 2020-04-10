@@ -1,5 +1,7 @@
 # Hooks
 
+> WHat's New : Added [REST API](docs/api.md)
+
 ![Main web page](docs/screenshots/webhook-app.png)
 
 A simple [webhooks](https://en.wikipedia.org/wiki/Webhook) manager with event  triggering.
@@ -11,7 +13,7 @@ task queue.
 
 - [Deploy using Docker](docs/docker.md)
 - [Run using Python venv](docs/python-venv.md)
-
+- [REST API](docs/status.md)
 
 > Additional [developer setup notes](docs/developer-notes.md)
 
@@ -76,6 +78,10 @@ implemented through ORM layer using data [models](https://docs.djangoproject.com
 ## Server application deployment
 
 Dockerized as a simple [single image](docker.md)
+
+## REST API
+
+[REST API documentation](docs/api.md)
 
 ## TODO
 
