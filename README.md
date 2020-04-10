@@ -1,6 +1,6 @@
 # Hooks
 
-> WHat's New : Added [REST API](docs/api.md)
+> WHat's New : Added [REST API](docs/api.md) and added [tests with code coverage](docs/tests.md)
 
 ![Main web page](docs/screenshots/webhook-app.png)
 
@@ -83,11 +83,14 @@ Dockerized as a simple [single image](docker.md)
 
 [REST API documentation](docs/api.md)
 
+## Tests and code coverage
+
+[Run tests with coverage reporting](docs/tests.md)
+
 ## TODO
 
 - Dev
   - Code quality - unit tests, docstrings, type hints, pylint etc.
-  - Add a REST API interface for webhoock registration (stretch goal)
   - Add a common base template for all page templates
   - Add model and form constrains/validations
 - Deploy (Changes for production deployment)
