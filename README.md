@@ -1,6 +1,6 @@
 # Hooks
 
-> WHat's New : Added [REST API](docs/api.md) and added [tests with code coverage](docs/tests.md)
+> What's New : Added [REST API](docs/api.md) and added [tests with code coverage](docs/tests.md)
 
 ![Main web page](docs/screenshots/webhook-app.png)
 
