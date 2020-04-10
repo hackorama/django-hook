@@ -13,7 +13,7 @@ task queue.
 
 - [Deploy using Docker](docs/docker.md)
 - [Run using Python venv](docs/python-venv.md)
-- [REST API](docs/status.md)
+- [REST API](docs/api.md)
 
 > Additional [developer setup notes](docs/developer-notes.md)
 
