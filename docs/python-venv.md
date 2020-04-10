@@ -1,6 +1,6 @@
-# Python env 
+# Python venv
 
-Setup Python
+Set up Python
 
 ```
 $ python --version
