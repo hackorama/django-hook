@@ -84,9 +84,11 @@ Dockerized as a simple [single image](docker.md)
 
 [REST API documentation](docs/api.md)
 
-Available at `http://localhost:8000/api/`
 
-![Browsable API](docs/screenshots/api-console.png)
+| `http://localhost:8000/api-help/` | `http://localhost:8000/api/` |
+| --- | --- |
+| ![API Help](docs/screenshots/api-help.png) |  ![API Console](docs/screenshots/api-console.png) |
+
 
 ## Tests and code coverage
 

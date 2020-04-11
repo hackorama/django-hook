@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'huey.contrib.djhuey',
     'rest_framework',
     'django_nose',
+    'drf_yasg',
 ]
 
 MIDDLEWARE = [

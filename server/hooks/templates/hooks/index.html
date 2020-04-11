@@ -8,8 +8,7 @@
 </head>
 <body>
 
-<h1>Hooks</h1>
-<h3>A Webhook Manager</h3>
+<h2>Hooks - Webhook Manager</h2>
 
 <img src="{% static "hooks/webhooks-logo-transparent.png" %}" alt="Webhooks Logo" width="100px">
 
@@ -40,9 +39,6 @@
     <a href="{% url 'webhook_new'  %}">Register new webhook</a>
 </p>
 
-<p>
-    Webhook deleting is restricted to <a href="/admin">Admin</a> console or <a href="/api">API</a>.
-</p>
 
 <h4>Webhooks registered for events</h4>
 
@@ -75,19 +71,22 @@
 </table>
 {% else %}
 <p>No events available, please add events using <a href="/admin">Admin</a> interface</p> or using the
-<a href="/api">API</a>
+<a href="/api">API.</a>
 {% endif %}
 
-<p>
-    Event editing is restricted to <a href="/admin">Admin</a> console or  <a href="/api">API</a>
-</p>
+<h4>Admin and API</h4>
+
+Event editing and Webhook deleting are restricted to Admin console or API.
+
+<ul>
+    <li><a href="/admin">Admin Console</a></li>
+    <li><a href="/api-help">API Help</a></li>
+    <li><a href="/api">API Console</a></li>
+</ul>
 
 <br>
-<br>
 
-<p>
-    <i>Please check the server logs, task queue logs and consumer logs to observe the webhook execution.<i>
-</p>
+<i>Please check the server logs, task queue logs and consumer logs to observe the webhook execution.</i>
 
 </body>
 </html>

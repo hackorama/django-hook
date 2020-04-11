@@ -3,9 +3,12 @@
 Both webhooks (`api/webhooks`) and events (`api/events`) are available through RESTful API supporting CRUD operations
 following standard conventions.
 
-Please use the default browsable API console enabled at `/api` for more details.
+Use the API console and help for the complete API documentation.
 
-![Browseable API Console](screenshots/api-console.png)
+| `http://localhost:8000/api-help/` | `http://localhost:8000/api/` |
+| --- | --- |
+| ![API Help](screenshots/api-help.png) |  ![API Console](screenshots/api-console.png) |
+
 
 > NOTE: API endpoint URLs uses the default Django
 >[trailing slash is required convention](https://docs.djangoproject.com/en/3.0/ref/settings/#append-slash).
