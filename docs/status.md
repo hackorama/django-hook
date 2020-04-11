@@ -1,11 +1,18 @@
 # Status
 
+- [April 10 2020](#april-10-2020)
 - [April 9 2020](#april-9-2020)
 - [April 5 2020](#april-5-2020)
 - [April 4 2020](#april-4-2020)
 - [April 3 2020](#april-3-2020)
 - [April 2 2020](#april-2-2020)
 - [April 1 2020](#april-1-2020)
+
+## April 10 2020
+
+- Added [REST API](api.md)
+- Refactored task scheduling out of views to a separate module and added docstrings
+- Added [tests with code coverage](tests.md)
 
 ## April 9 2020
 
