@@ -7,6 +7,14 @@ Please use the default browsable API console enabled at `/api` for more details.
 
 ![Browseable API Console](screenshots/api-console.png)
 
+> NOTE: API endpoint URLs uses the default Django
+>[trailing slash is required convention](https://docs.djangoproject.com/en/3.0/ref/settings/#append-slash).
+>
+>  `http://127.0.0.1:8000/api/webhooks/`: Correct usage
+>
+>  `http://127.0.0.1:8000/api/webhooks`: Will return `HTTP/1.1 301 Moved Permanently`
+
+
 ```shell script
 $ curl  -s http://127.0.0.1:8000/api/webhooks/ | python -m json.tool
 {
