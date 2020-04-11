@@ -24,12 +24,13 @@ hooks/migrations/0001_initial.py       5      0   100%
 hooks/migrations/__init__.py           0      0   100%
 hooks/models.py                       11      9    18%
 hooks/serializers.py                  11      0   100%
-hooks/urls.py                          8      0   100%
-hooks/views.py                        72     44    39%
+hooks/task_scheduler.py               26     15    42%
+hooks/urls.py                         13      0   100%
+hooks/views.py                        52     24    54%
 ------------------------------------------------------
-TOTAL                                130     61    53%
+TOTAL                                141     56    60%
 ----------------------------------------------------------------------
-Ran 4 tests in 0.255s
+Ran 4 tests in 0.770s
 
 OK
 Destroying test database for alias 'default'...
