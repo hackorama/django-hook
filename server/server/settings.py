@@ -170,3 +170,8 @@ NOSE_ARGS = [
     '--cover-package=hooks',
     '--cover-html'
 ]
+
+
+# Hooks application configuration
+
+HOOKS_RETRY_DELAY_SECS = 3
