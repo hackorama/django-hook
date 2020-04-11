@@ -1,4 +1,12 @@
 #!/bin/bash
+#
+# Docker entrypoint script
+#
+# Launches Huey task queue worker process in background and launches Django server after configuring database
+# and seeding sample test data.
+#
+# TODO: Use rsupervisord for launching task queue background process or move the task queue to a separate image
+#
 
 echo
 echo "Hooks - Webhooks manager"
@@ -17,7 +25,7 @@ echo
 echo "Huey task queue worker started with logs at /server/hey.log"
 echo
 
-echo "Starting Hooks Django server at http://localhost:8090/ ..."
+echo "Starting Hooks Django server at http://localhost:8000/ ..."
 echo
 
 python -u manage.py runserver 0.0.0.0:8000 2>&1
