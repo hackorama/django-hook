@@ -14,6 +14,7 @@ task queue.
 - [Deploy using Docker](docs/docker.md)
 - [Run using Python venv](docs/python-venv.md)
 - [REST API](docs/api.md)
+- [Admin Page](#admin-interface)
 
 > Additional [developer setup notes](docs/developer-notes.md)
 
@@ -83,9 +84,21 @@ Dockerized as a simple [single image](docker.md)
 
 [REST API documentation](docs/api.md)
 
+Available at `http://localhost:8000/api/`
+
+![Browsable API](docs/screenshots/api-console.png)
+
 ## Tests and code coverage
 
 [Run tests with coverage reporting](docs/tests.md)
+
+## Admin interface
+
+Available at `http://localhost:8000/admin/`
+
+![Hooks Admin Page](docs/screenshots/admin-console.png)
+
+> When [deploying using Docker](docs/docker.md) default admin credentials are admin/admin
 
 ## TODO
 
@@ -93,6 +106,8 @@ Dockerized as a simple [single image](docker.md)
   - Code quality - unit tests, docstrings, type hints, pylint etc.
   - Add a common base template for all page templates
   - Add model and form constrains/validations
+  - Enable HTTPS for the server and for webhook consumer target URLs
+  - Enable user authentication for API and webapp
 - Deploy (Changes for production deployment)
   - Docker compose with separate images and shared volume for database
   - Switch out SQLite with PostgreSQL/MySQL
