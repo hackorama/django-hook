@@ -1,6 +1,18 @@
 # Deploy with Docker
 
-## Build 
+
+## Run the image from docker hub
+
+On docker hub: [hackorama/hooks](https://hub.docker.com/r/hackorama/hooks)
+
+```shell script
+$ docker run -d --name=hooks -p 8000:8000 hackorama/hooks
+```
+
+> NOTE: Default Django admin credentials are `admin/admin` for hooks Docker image
+
+## Or build a local image and run
+
 ```shell script
 $ docker build -t hooks .
 
@@ -9,9 +21,7 @@ hooks                                  latest              1d1aefbd1bf1        1
 
 ```
 
-> NOTE: Default admin credentials are admin/admin in the Dockerfile
 
-## Deploy 
 
 ```shell script
 $ docker run -d --name=hooks -p 8000:8000 hooks 
