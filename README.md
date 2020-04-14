@@ -88,8 +88,10 @@ Triggered event "create" ...
 
 For each event trigger:
  - Lookup the webhooks for the corresponding event from database
- - Submit a POST request for each webhook with event name as the payload using a retrying task queue
- - Any non-Success response code or any exceptions caused the webhook and payload to be retried by the task queue
+ - Submit a POST request for each webhook with event details as the payload using a retrying task queue
+ - Any non-success response code or any exceptions will make the webhook and payload to be retried by the task queue
+
+> Task queue retry delay is configurable in `server/server/settings.py` as `HOOKS_RETRY_DELAY_SECS = 3`
 
 ### Webhook task queue
 
