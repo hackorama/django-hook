@@ -6,6 +6,10 @@
 
 A simple [webhooks](https://en.wikipedia.org/wiki/Webhook) manager with event  triggering.
 
+Provides a web application interface and a REST API interface.
+
+A simple event triggering endpoint and a consumer app are provided for testing.
+
 Built using [Django](https://www.djangoproject.com) web framework and [Huey](https://huey.readthedocs.io/en/latest/)
 task queue.
 
@@ -43,22 +47,49 @@ This is a demo client application that can receive/consume a set of webhooks use
 > Any of the public webhooks test sites like [webhook.site](https://webhook.site) can also be used but having a local
 >consumer allows us to test failure cases and retry easily.
 
+Consumer logs the request path and request body of the webhook POST request and responds with 200 OK and empty body.
+
+```shell script
+$ python consumer/consumer.py
+Starting webhook consumer at http://127.0.0.1:8888/
+Received POST /alerts event=delete&time=2020-04-13T21%3A30%3A28.152727, Responded with 200
+...
+```
+
+You can also run the consumer to return Non-OK response code to test retry queueing.
+
+```shell script
+$ python consumer/consumer.py 500
+Starting webhook consumer at http://127.0.0.1:8888/
+Received POST /logging event=delete&time=2020-04-13T21%3A38%3A24.155220, Responded with 500
+...
+```
+
 ## Server application design
 
 ### Webhook registration
 
-Webhooks are created and linked one or more of the event/s.
+Webhooks are created and linked to one or more of the event/s.
 
 ### Event triggering
 
 Events are triggered using a trigger API endpoint `trigger/<event>`
+
+Can be triggered from the Web application browser or from command line.
+
+```shell script
+$ curl http://localhost:8000/trigger/create
+...
+Triggered event "create" ...
+...
+```
 
 ### Webhook execution
 
 For each event trigger:
  - Lookup the webhooks for the corresponding event from database
  - Submit a POST request for each webhook with event name as the payload using a retrying task queue
- - For non-Success response or failed connection add the webhook and payload to retry queue
+ - Any non-Success response code or any exceptions caused the webhook and payload to be retried by the task queue
 
 ### Webhook task queue
 
@@ -107,7 +138,6 @@ Available at `http://localhost:8000/admin/`
 - Dev
   - Code quality - unit tests, docstrings, type hints, pylint etc.
   - Add a common base template for all page templates
-  - Add model and form constrains/validations
   - Enable HTTPS for the server and for webhook consumer target URLs
   - Enable user authentication for API and webapp
 - Deploy (Changes for production deployment)

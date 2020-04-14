@@ -11,9 +11,6 @@ from .task_scheduler import schedule_webhooks_for_event
 
 logger = logging.getLogger(__name__)
 
-# TODO Pick ideal default and make it configurable
-HTTP_POST_REQUEST_RETRY_DELAY = 3
-
 
 @register.filter
 def get_item(dictionary, key):
@@ -46,7 +43,7 @@ def trigger(request, name):
 
 def webhook_view(request, pk):
     webhook = get_object_or_404(Webhook, pk=pk)
-    events = webhook.events.all()  # TODO Optimize related lookup query
+    events = webhook.events.all()
     return render(request, 'hooks/webhook_view.html', {'webhook': webhook, 'events': events})
 
 

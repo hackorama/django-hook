@@ -42,7 +42,9 @@ def post_url(url, payload):
     headers = {'Content-type': 'application/json', 'Accept': 'text/plain'}
     try:
         response = requests.post(url=url, data=payload, headers=headers)
-        if response.status_code not in range(200, 299):  # TODO Better check for valid 2xx codes
+        # NOTE: Specification requires only 2xx response code range for success
+        # Requests provided `response.ok` check, but includes 2xx and 3xx range
+        if response.status_code not in range(200, 299):
             logger.warning("Unexpected response code %s from %s", response.status_code, url)
             raise RetryTask()  # Queues the task for retry
     except requests.exceptions.RequestException:
