@@ -1,11 +1,14 @@
 # Tests and Coverage
 
+- [Automated unit tests and coverage](#automated-unit-tests-and-coverage)
+- [Manual integration tests](#manual-integration-tests)
+
+## Automated unit tests and coverage
+
 Basic API tests added with code coverage enabled using [Nose](https://nose.readthedocs.io/en/latest/) and
 [Coverage](https://pypi.org/project/coverage/).
 
-> TODO: Add more API tests
-
-> TODO: Add model/view tests
+> TODO: Add more API tests and model/view/form tests
 
 ```shell script
 $ python manage.py test --with-coverage
@@ -37,3 +40,72 @@ Destroying test database for alias 'default'...
 ```
 
 Open interactive HTML reports at `cover/index.html`
+
+## Manual integration tests
+
+Run the server using [docker](docker.md) or [python venv](python-venv.md)
+
+Open [http://127.0.0.1:8000](http://127.0.0.1:8000) on browser
+
+Start the test consumer on port 8888
+
+> If using docker run the consumer inside the docker container
+> `$ docker exec -ti hooks bash`
+> `root@22aa8a5a45ca:/server# python /server/consumer.py`
+
+```shell script
+$ cd consumer
+$ python consumer.py
+Starting webhook consumer on http://127.0.0.1:8888/
+```
+
+Use the already provided sample webhooks and events and trigger an event from web app or from CLI Example:
+`curl http://localhost:8000/trigger/create`
+
+Verify the wegbhook execution on test consumer log
+
+```shell script
+Received POST /audit event=create&time=2020-04-09T08%3A51%3A48.381993, Responded with 200
+```
+
+> You can also register new webhooks from web app or using REST API.
+> Use webhook URLs pointing to test consumer `http://127.0.0.1:8888/my/test`
+
+To test failure retry feature stop and run test consumer with a different non-OK response code like `500`
+
+```shell script
+$ cd consumer
+$ python consumer.py 500
+Starting webhook consumer on http://127.0.0.1:8888/
+```
+
+Trigger an event from web app and verify the same event being retried repeatedly both on the server logs and on the
+consumer logs.
+
+```shell script
+$ docker logs hooks --follow | python manage.py runserver
+...
+...
+Requesting POST http://localhost:8888/alerts {'event': 'create', 'time': '2020-04-09T08:51:48.381993'}
+Requesting POST http://localhost:8888/alerts {'event': 'create', 'time': '2020-04-09T08:51:48.381993'}
+Requesting POST http://localhost:8888/alerts {'event': 'create', 'time': '2020-04-09T08:51:48.381993'}
+```
+
+```shell script
+$ python consumer.py 500
+...
+...
+Received POST /alerts event=create&time=2020-04-09T08%3A51%3A48.381993, Responded with 500
+Received POST /alerts event=create&time=2020-04-09T08%3A51%3A48.381993, Responded with 500
+Received POST /alerts event=create&time=2020-04-09T08%3A51%3A48.381993, Responded with 500
+```
+
+Now stop and run the consumer in default mode which will respond with the expected 200 response code and the retries
+ill stop.
+
+```shell script
+$ cd consumer
+$ python consumer.py
+Starting webhook consumer on http://127.0.0.1:8888/
+Received POST /alerts event=create&time=2020-04-09T08%3A51%3A48.381993, Responded with 200
+```

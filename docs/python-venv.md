@@ -58,22 +58,11 @@ $ python consumer.py
 Starting webhook consumer on http://127.0.0.1:8888/
 ```
 
-Open [http://127.0.0.1:8000](http://127.0.0.1:8000) on browser
+Open [http://127.0.0.1:8000](http://127.0.0.1:8000) on browser to access the server.
+
+See [the tests page](tests.md) on how to use test consumer and test the webhook execution.
 
 ![Main web page](screenshots/webhook-app.png)
-
-> Register new webhooks from main app page [http://127.0.0.1:8000](http://127.0.0.1:8000) using URLs pointing to test
-consumer.
->
-> Example URL: `http://127.0.0.1:8888/test/one`
-
-To test failure retry of webhooks run test consumer with a different non OK response code.
-
-```
-$ cd consumer
-$ python consumer.py 501
-Starting webhook consumer on http://127.0.0.1:8888/
-```
 
 
 > Additional [developer setup notes](docs/developer-notes.md)

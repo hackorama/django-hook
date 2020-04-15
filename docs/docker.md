@@ -57,24 +57,13 @@ Received POST /audit event=create&time=2020-04-09T08%3A51%3A48.381993, Responded
 
 ## Test
 
-Open [http://127.0.0.1:8000](http://127.0.0.1:8000) on browser
+Open [http://127.0.0.1:8000](http://127.0.0.1:8000) on browser to access the server.
+
+See [the tests page](tests.md) on how to use test consumer and test the webhook execution.
 
 ![Main web page](screenshots/webhook-app.png)
 
-> Register new webhooks from main app page [http://127.0.0.1:8000](http://127.0.0.1:8000) using URLs pointing to test
-consumer.
->
-> Example URL: `http://127.0.0.1:8888/test/one`
 
-To test failure retry of webhooks run test consumer with a different non OK response code.
-
-```shell script
-$ docker exec -ti hooks bash
-root@22aa8a5a45ca:/server# python /server/consumer.py 501
-Starting webhook consumer at http://127.0.0.1:8888/
-...
-Received POST /alerts event=create&time=2020-04-09T08%3A51%3A48.381993, Responded with 501
-```
 
 ## TODO
 
