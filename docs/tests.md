@@ -10,6 +10,12 @@ Basic API tests added with code coverage enabled using [Nose](https://nose.readt
 
 > TODO: Add more API tests and model/view/form tests
 
+
+| Python venv | Docker |
+| --- | --- |
+| `$ python manage.py test --with-coverage`  | `$ docker exec hooks python manage.py test --with-coverage` |
+
+
 ```shell script
 $ python manage.py test --with-coverage
 nosetests --cover-package=hooks --cover-html --with-coverage --verbosity=1
@@ -49,9 +55,9 @@ Open [http://127.0.0.1:8000](http://127.0.0.1:8000) on browser
 
 Start the test consumer on port 8888
 
-> If using docker run the consumer inside the docker container
-> `$ docker exec -ti hooks bash`
-> `root@22aa8a5a45ca:/server# python /server/consumer.py`
+| Python venv | Docker |
+| --- | --- |
+| `$ python consumer.py` | `$ docker exec -ti hooks bash` <br> `root@22aa8a5a45ca:/server# python /server/consumer.py` |
 
 ```shell script
 $ cd consumer
@@ -59,17 +65,20 @@ $ python consumer.py
 Starting webhook consumer on http://127.0.0.1:8888/
 ```
 
-Use the already provided sample webhooks and events and trigger an event from web app or from CLI Example:
-`curl http://localhost:8000/trigger/create`
+Use the already provided sample webhooks and events and trigger an event from the web app interface or from command
+line using curl.
 
-Verify the wegbhook execution on test consumer log
+> CLI Example: `curl http://localhost:8000/trigger/create`
+
+Verify the webhook execution in the test consumer log ...
 
 ```shell script
 Received POST /audit event=create&time=2020-04-09T08%3A51%3A48.381993, Responded with 200
 ```
 
-> You can also register new webhooks from web app or using REST API.
-> Use webhook URLs pointing to test consumer `http://127.0.0.1:8888/my/test`
+> You can also register new webhooks from the web app or using the [REST API](api.md)
+>
+> Use webhook URLs pointing to test consumer: `http://127.0.0.1:8888/my/test`
 
 To test failure retry feature stop and run test consumer with a different non-OK response code like `500`
 
