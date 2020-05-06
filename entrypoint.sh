@@ -17,7 +17,7 @@ cd /server
 python manage.py makemigrations
 python manage.py migrate
 python manage.py createsuperuser --noinput
-python manage.py loaddata sample-data
+python manage.py loaddata sample-data-docker
 
 nohup python -u manage.py run_huey > huey.log &
 

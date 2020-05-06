@@ -1,0 +1,69 @@
+[
+    {
+        "model": "hooks.event",
+        "pk": 1,
+        "fields": {
+            "name": "create"
+        }
+    },
+    {
+        "model": "hooks.event",
+        "pk": 2,
+        "fields": {
+            "name": "update"
+        }
+    },
+    {
+        "model": "hooks.event",
+        "pk": 3,
+        "fields": {
+            "name": "delete"
+        }
+    },
+    {
+        "model": "hooks.event",
+        "pk": 4,
+        "fields": {
+            "name": "read"
+        }
+    },
+    {
+        "model": "hooks.webhook",
+        "pk": 1,
+        "fields": {
+            "name": "Logging",
+            "url": "http://consumer:8888/logging",
+            "events": [
+                1,
+                2,
+                3,
+                4
+            ]
+        }
+    },
+    {
+        "model": "hooks.webhook",
+        "pk": 2,
+        "fields": {
+            "name": "Alerts",
+            "url": "http://consumer:8888/alerts",
+            "events": [
+                1,
+                3
+            ]
+        }
+    },
+    {
+        "model": "hooks.webhook",
+        "pk": 3,
+        "fields": {
+            "name": "Auditing",
+            "url": "http://consumer:8888/audit",
+            "events": [
+                1,
+                2,
+                3
+            ]
+        }
+    }
+]

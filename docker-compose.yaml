@@ -1,0 +1,10 @@
+version: '3.3'
+services:
+  hooks:
+    build: .
+    ports:
+      - "8000:8000"
+  consumer:
+    build: ./consumer
+    ports:
+      - "8888:8888"
