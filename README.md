@@ -10,6 +10,8 @@ Provides a web application interface and a REST API interface.
 
 A simple event triggering endpoint and a consumer app are provided for testing.
 
+![Test consumer](docs/screenshots/consumer.png)
+
 Built using [Django](https://www.djangoproject.com) web framework and [Huey](https://huey.readthedocs.io/en/latest/)
 task queue.
 

@@ -104,17 +104,18 @@ Requesting POST http://localhost:8888/alerts {'event': 'create', 'time': '2020-0
 $ python consumer.py 500
 ...
 ...
-Received POST /alerts event=create&time=2020-04-09T08%3A51%3A48.381993, Responded with 500
-Received POST /alerts event=create&time=2020-04-09T08%3A51%3A48.381993, Responded with 500
-Received POST /alerts event=create&time=2020-04-09T08%3A51%3A48.381993, Responded with 500
+Received POST /alerts {"event": "create", "time": "2020-04-09T08:51:48.381993"}, Responded with 500
+Received POST /alerts {"event": "create", "time": "2020-04-09T08:51:48.381993"}, Responded with 500
+Received POST /alerts {"event": "create", "time": "2020-04-09T08:51:48.381993"}, Responded with 500
+
 ```
 
 Now stop and run the consumer in default mode which will respond with the expected 200 response code and the retries
-ill stop.
+will stop.
 
 ```shell script
 $ cd consumer
 $ python consumer.py
 Starting webhook consumer on http://127.0.0.1:8888/
-Received POST /alerts event=create&time=2020-04-09T08%3A51%3A48.381993, Responded with 200
+Received POST /alerts {"event": "create", "time": "2020-04-09T08:51:48.381993"}, Responded with 200
 ```

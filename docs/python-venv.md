@@ -64,5 +64,9 @@ See [the tests page](tests.md) on how to use test consumer and test the webhook 
 
 ![Main web page](screenshots/webhook-app.png)
 
+Open [http://127.0.0.1:8888](http://127.0.0.1:8888) on browser to access the test consumer.
+
+![Test consumer](screenshots/consumer.png)
+
 
 > Additional [developer setup notes](docs/developer-notes.md)
