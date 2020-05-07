@@ -1,13 +1,13 @@
 version: '3.3'
 services:
   hooks:
-    image: hackorama/hooks
+    build: .
     ports:
       - "8000:8000"
     environment:
       # When using compose networking initialize data with service name of the consumer instead of default localhost
       - DATA=sample-data-docker
   consumer:
-    image: hackorama/consumer
+    build: ./consumer
     ports:
       - "8888:8888"
