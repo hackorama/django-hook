@@ -32,9 +32,9 @@ class Handler(http.server.SimpleHTTPRequestHandler):
         self.send_header('Content-type', 'text/html')
         self.end_headers()
         if len(self.call_log) < 1:
-            self.wfile.write("No webhook calls received by this consumer".encode())
+            self.wfile.write("This consumer has not received any webhook calls yet".encode())
         else:
-            self.wfile.write("Webhook calls received by this consumer".encode())
+            self.wfile.write("<h3>Webhook calls received by this consumer</h3>".encode())
             self.wfile.write("<br>".encode())
             self.wfile.write("<table border=1>".encode())
             self.wfile.write("<tr><th>Webhook path</th><th>Payload</th></tr>".encode())
@@ -42,7 +42,8 @@ class Handler(http.server.SimpleHTTPRequestHandler):
                 self.wfile.write(call.encode())
             self.wfile.write("</table>".encode())
             self.wfile.write(
-                "<i>Listed in reverse order, limited to most recent {}</i>".format(self.call_log.maxlen).encode())
+                "<i>Listed in reverse order, limited to most recent {} calls</i>".format(self.call_log.maxlen).encode())
+        self.wfile.write("<p><a href=\"javascript:history.go(0)\">Refresh the page</a>".encode())
 
     def do_POST(self):
         # Log and add the web hook call to the webhook call log list
