@@ -1,7 +1,10 @@
 # API
 
+
 Both webhooks (`api/webhooks`) and events (`api/events`) are available through RESTful API supporting CRUD operations
 following standard conventions.
+
+Implemented using the [Django REST framework](https://www.django-rest-framework.org).
 
 Use the API console and help for the complete API documentation.
 
@@ -86,4 +89,22 @@ $ curl  -s http://127.0.0.1:8000/api/events/ | python -m json.tool
         }
     ]
 }
+```
+
+
+# API Approach
+
+The API above uses the Django REST framework provided default handling using `rest_framework.viewsets.ModelViewSet`.
+
+Instead we can also define custom handling, for example the webhook to events relations can also be handled using the
+following alternate approach.
+
+Remove `events` from the body for the existing `POST` `/webhooks/` then provide a new API for webhooks to events
+relation.
+
+| Method | Path | Notes |
+| --- | ---- | ---- |
+| GET | `/webhooks/<id>/events/` |  Get all events registered for the given webhook |
+| PUT | `/webhooks/<id>/events/<id>` | Register the given event with the given webhook |
+| DELETE | `/webhooks/<id>/events/<id>` | Unregister the given event from the given webhook  |
 
