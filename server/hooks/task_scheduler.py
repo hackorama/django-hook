@@ -39,9 +39,8 @@ def post_url(url, payload):
     To change this behavior update task decorator: @task(retry_count=RETRY_COUNT, retry_delay=RETRY_DELAY_SECS)
     """
     logger.info("Requesting POST %s %s", url, payload)
-    headers = {'Content-type': 'application/json', 'Accept': 'text/plain'}
     try:
-        response = requests.post(url=url, data=payload, headers=headers)
+        response = requests.post(url=url, json=payload)
         # NOTE: Specification requires only 2xx response code range for success
         # Requests provided `response.ok` check, but includes 2xx and 3xx range
         if response.status_code not in range(200, 299):
