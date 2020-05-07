@@ -1,5 +1,14 @@
 # Deploy with Docker
 
+Using recent versions of Docker and Compose
+
+> $ docker-compose --version
+>
+> docker-compose version 1.25.4
+>
+> $ docker --version
+>
+> Docker version 19.03.8
 
 ## Docker Compose
 
