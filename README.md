@@ -54,7 +54,7 @@ Consumer logs the request path and request body of the webhook POST request and 
 ```shell script
 $ python consumer/consumer.py
 Starting webhook consumer at http://127.0.0.1:8888/
-Received POST /alerts event=delete&time=2020-04-13T21%3A30%3A28.152727, Responded with 200
+Received POST /alerts {"event": "create", "time": "2020-04-09T08:51:48.381993"}, Responded with 200
 ...
 ```
 
@@ -63,7 +63,8 @@ You can also run the consumer to return Non-OK response code to test retry queue
 ```shell script
 $ python consumer/consumer.py 500
 Starting webhook consumer at http://127.0.0.1:8888/
-Received POST /logging event=delete&time=2020-04-13T21%3A38%3A24.155220, Responded with 500
+Received POST /alerts {"event": "create", "time": "2020-04-09T08:51:48.381993"}, Responded with 500
+Received POST /alerts {"event": "create", "time": "2020-04-09T08:51:48.381993"}, Responded with 500
 ...
 ```
 
