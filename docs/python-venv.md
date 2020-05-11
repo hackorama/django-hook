@@ -18,6 +18,13 @@ Install modules
 $ pip install -r requirements.txt
 ```
 
+Get the source
+
+```
+$ git clone git@github.com:hackorama/django-hook.git
+$ cd django-hook
+```
+
 Initialize database
 
 ```

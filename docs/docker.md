@@ -17,6 +17,8 @@ For quick demo docker compose is the best option.
 ### Use published images from docker hub
 
 ```shell script
+$ git clone git@github.com:hackorama/django-hook.git
+$ cd django-hook
 $ docker-compose up
 Pulling hooks (hackorama/hooks:)...
 Pulling consumer (hackorama/consumer:)...
